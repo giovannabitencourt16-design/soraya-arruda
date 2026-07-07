@@ -1,0 +1,583 @@
+/*=========================
+RESET
+=========================*/
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+
+    font-family:'Poppins',sans-serif;
+    background:#f8f9fc;
+
+}
+
+/*=========================
+LAYOUT
+=========================*/
+
+.dashboard{
+
+    display:flex;
+    min-height:100vh;
+
+}
+
+/*=========================
+SIDEBAR
+=========================*/
+
+.sidebar{
+
+    width:280px;
+    background:linear-gradient(180deg,#e85d9e,#ff8fbc);
+    color:#fff;
+    padding:35px 25px;
+    display:flex;
+    flex-direction:column;
+
+}
+
+.logo{
+
+    text-align:center;
+    margin-bottom:45px;
+
+}
+
+.logo h2{
+
+    font-size:30px;
+    margin-bottom:8px;
+
+}
+
+.logo span{
+
+    opacity:.9;
+    font-size:14px;
+
+}
+
+/*=========================
+MENU
+=========================*/
+
+.sidebar nav{
+
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+
+}
+
+.sidebar nav a{
+
+    text-decoration:none;
+    color:#fff;
+    padding:16px;
+    border-radius:14px;
+    display:flex;
+    align-items:center;
+    gap:15px;
+    transition:.3s;
+
+}
+
+.sidebar nav a:hover{
+
+    background:rgba(255,255,255,.18);
+
+}
+
+.sidebar nav a.ativo{
+
+    background:#fff;
+    color:#e85d9e;
+    font-weight:600;
+
+}
+
+/*=========================
+CONTEÚDO
+=========================*/
+
+.conteudo{
+
+    flex:1;
+    padding:40px;
+
+}
+
+/*=========================
+TOPO
+=========================*/
+
+.topo{
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:40px;
+
+}
+
+.topo h1{
+
+    font-size:36px;
+    color:#333;
+
+}
+
+.topo p{
+
+    color:#777;
+    margin-top:5px;
+
+}
+
+.novo{
+
+    background:#e85d9e;
+    color:#fff;
+    border:none;
+    padding:15px 25px;
+    border-radius:50px;
+    cursor:pointer;
+    font-size:15px;
+    transition:.3s;
+
+}
+
+.novo:hover{
+
+    transform:translateY(-3px);
+    box-shadow:0 12px 25px rgba(232,93,158,.35);
+
+}/*=========================
+CARDS
+=========================*/
+
+.cards{
+
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:25px;
+    margin-bottom:40px;
+
+}
+
+.card{
+
+    background:#fff;
+    border-radius:20px;
+    padding:25px;
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+    transition:.3s;
+    cursor:pointer;
+
+}
+
+.card:hover{
+
+    transform:translateY(-8px);
+
+}
+
+.card i{
+
+    font-size:35px;
+    color:#e85d9e;
+    margin-bottom:15px;
+
+}
+
+.card h3{
+
+    color:#666;
+    font-size:16px;
+    margin-bottom:10px;
+
+}
+
+.card h2{
+
+    color:#333;
+    font-size:32px;
+
+}
+
+/*=========================
+PAINEL
+=========================*/
+
+.painel{
+
+    display:grid;
+    grid-template-columns:2fr 1fr;
+    gap:30px;
+
+}
+
+/*=========================
+AGENDA
+=========================*/
+
+.agenda-dia{
+
+    background:#fff;
+    border-radius:20px;
+    padding:30px;
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+}
+
+.titulo{
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:25px;
+
+}
+
+.titulo h2{
+
+    color:#333;
+
+}
+
+.titulo span{
+
+    color:#888;
+
+}
+
+.agendamento{
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:20px;
+    border-radius:15px;
+    background:#fafafa;
+    margin-bottom:15px;
+    transition:.3s;
+
+}
+
+.agendamento:hover{
+
+    background:#fff1f7;
+
+}
+
+.hora{
+
+    width:80px;
+    font-size:18px;
+    font-weight:700;
+    color:#e85d9e;
+
+}
+
+.cliente{
+
+    flex:1;
+    margin-left:20px;
+
+}
+
+.cliente strong{
+
+    display:block;
+    margin-bottom:5px;
+    color:#333;
+
+}
+
+.cliente p{
+
+    color:#777;
+    font-size:14px;
+
+}
+
+.status{
+
+    padding:8px 15px;
+    border-radius:30px;
+    font-size:13px;
+    font-weight:600;
+
+}
+
+.confirmado{
+
+    background:#dff8e7;
+    color:#1b8a42;
+
+}
+/*=========================
+LADO DIREITO
+=========================*/
+
+.lado-direito{
+
+    display:flex;
+    flex-direction:column;
+    gap:25px;
+
+}
+
+.card-lateral{
+
+    background:#fff;
+    border-radius:20px;
+    padding:25px;
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+}
+
+.card-lateral h2{
+
+    color:#333;
+    margin-bottom:20px;
+
+}
+
+.card-lateral input{
+
+    width:100%;
+    padding:15px;
+    border:2px solid #f3d7e4;
+    border-radius:12px;
+    outline:none;
+    font-size:15px;
+
+}
+
+.card-lateral input:focus{
+
+    border-color:#e85d9e;
+
+}
+
+/*=========================
+BOTÕES
+=========================*/
+
+.acao{
+
+    width:100%;
+    margin-bottom:15px;
+    padding:15px;
+    border:none;
+    border-radius:12px;
+    background:#fff1f7;
+    color:#e85d9e;
+    font-size:15px;
+    font-weight:600;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    gap:12px;
+    transition:.3s;
+
+}
+
+.acao:hover{
+
+    background:#e85d9e;
+    color:#fff;
+
+}
+
+.acao:last-child{
+
+    margin-bottom:0;
+
+}
+
+/*=========================
+ANIMAÇÃO
+=========================*/
+
+.card,
+.card-lateral,
+.agenda-dia{
+
+    animation:fade .5s ease;
+
+}
+
+@keyframes fade{
+
+    from{
+
+        opacity:0;
+        transform:translateY(20px);
+
+    }
+
+    to{
+
+        opacity:1;
+        transform:translateY(0);
+
+    }
+
+}
+
+/*=========================
+RESPONSIVO
+=========================*/
+
+@media(max-width:1200px){
+
+    .cards{
+
+        grid-template-columns:repeat(2,1fr);
+
+    }
+
+}
+
+@media(max-width:900px){
+
+    .dashboard{
+
+        flex-direction:column;
+
+    }
+
+    .sidebar{
+
+        width:100%;
+
+    }
+
+    .painel{
+
+        grid-template-columns:1fr;
+
+    }
+
+}
+
+@media(max-width:650px){
+
+    .conteudo{
+
+        padding:20px;
+
+    }
+
+    .cards{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .topo{
+
+        flex-direction:column;
+        align-items:flex-start;
+        gap:20px;
+
+    }
+
+    .agendamento{
+
+        flex-direction:column;
+        align-items:flex-start;
+        gap:10px;
+
+    }
+
+    .cliente{
+
+        margin-left:0;
+
+    }
+
+}
+/* ==========================
+   FULLCALENDAR
+========================== */
+
+.calendario-card {
+    padding: 20px;
+}
+
+#calendar {
+    margin-top: 15px;
+}
+
+/* Cabeçalho do calendário */
+.fc .fc-toolbar-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+}
+
+/* Botões */
+.fc .fc-button {
+    background: #e85b9a !important;
+    border: none !important;
+    border-radius: 10px !important;
+    padding: 6px 12px !important;
+    text-transform: capitalize;
+}
+
+.fc .fc-button:hover {
+    background: #d94b8a !important;
+}
+
+.fc .fc-button:disabled {
+    opacity: .6;
+}
+
+/* Dias */
+.fc-theme-standard td,
+.fc-theme-standard th,
+.fc-theme-standard .fc-scrollgrid {
+    border-color: #f2f2f2;
+}
+
+.fc-daygrid-day-number {
+    color: #444;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+/* Dia atual */
+.fc .fc-day-today {
+    background: rgba(232,91,154,.12) !important;
+}
+
+/* Eventos */
+.fc-event {
+    background: #e85b9a !important;
+    border: none !important;
+    border-radius: 8px;
+    padding: 2px 4px;
+    font-size: 12px;
+}
+
+/* Responsivo */
+@media (max-width:768px){
+
+    .fc .fc-toolbar {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .fc-toolbar-title {
+        font-size:16px;
+    }
+
+}

@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Clientes | Soraya Arruda</title>
+
+    <link rel="stylesheet" href="../css/clientes.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+</head>
+
+<body>
+
+    <div class="dashboard">
+
+        <aside class="sidebar">
+
+            <div class="logo">
+
+                <h2>Soraya Arruda</h2>
+
+                <span>Painel Administrativo</span>
+
+            </div>
+
+            <nav>
+
+                <a href="dashboard.html">
+                    <i class="fa-solid fa-house"></i>
+                    Dashboard
+                </a>
+
+                <a href="agenda.html">
+                    <i class="fa-solid fa-calendar-days"></i>
+                    Agenda
+                </a>
+
+                <a href="clientes.html" class="ativo">
+                    <i class="fa-solid fa-users"></i>
+                    Clientes
+                </a>
+
+                <a href="servicos.html">
+                    <i class="fa-solid fa-hand-sparkles"></i>
+                    Serviços
+                </a>
+
+                <a href="configuracoes.html">
+                    <i class="fa-solid fa-gear"></i>
+                    Configurações
+                </a>
+
+                <a href="login.html">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    Sair
+                </a>
+
+            </nav>
+
+        </aside>
+
+        <main class="conteudo">
+
+            <header class="topo">
+
+                <div>
+
+                    <h1>Clientes</h1>
+
+                    <p>Gerencie todos os clientes cadastrados.</p>
+
+                </div>
+
+                <button class="btn-novo" id="abrirNovoCliente">
+
+                    <i class="fa-solid fa-user-plus"></i>
+
+                    Novo Cliente
+
+                </button>
+
+            </header>
+
+            <section class="pesquisa">
+
+                <div class="campo-pesquisa">
+
+                    <i class="fa-solid fa-magnifying-glass"></i>
+
+                    <input
+                        type="text"
+                        id="buscarCliente"
+                        placeholder="Pesquisar cliente por nome ou telefone">
+
+                </div>
+
+            </section>
+
+            <section class="lista-clientes"></section>
+
+        </main>
+
+    </div>
+
+    <!-- Modal Novo Cliente -->
+
+    <div class="modal" id="modalNovoCliente">
+
+        <div class="modal-box">
+
+            <div class="modal-topo">
+
+                <h2>Novo Cliente</h2>
+
+                <button class="fechar-modal" id="fecharNovoCliente">
+
+                    <i class="fa-solid fa-xmark"></i>
+
+                </button>
+
+            </div>
+
+            <form id="formNovoCliente">
+
+                <div class="grupo-input">
+
+                    <label for="nomeCliente">Nome</label>
+
+                    <input
+                        type="text"
+                        id="nomeCliente"
+                        required>
+
+                </div>
+
+                <div class="grupo-input">
+
+                    <label for="telefoneCliente">Telefone</label>
+
+                    <input
+                        type="tel"
+                        id="telefoneCliente"
+                        placeholder="(11) 99999-9999"
+                        required>
+
+                </div>
+
+                <div class="grupo-input">
+
+                    <label for="observacaoCliente">Observações</label>
+
+                    <textarea
+                        id="observacaoCliente"
+                        rows="4"
+                        placeholder="Ex.: Cliente prefere esmalte vermelho."></textarea>
+
+                </div>
+
+                <div class="modal-acoes">
+
+                    <button
+                        type="button"
+                        class="btn-cancelar"
+                        id="cancelarNovoCliente">
+
+                        Cancelar
+
+                    </button>
+
+                    <button
+                        type="submit"
+                        class="btn-salvar">
+
+                        Salvar Cliente
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+    <!-- Modal Histórico -->
+
+    <div class="modal" id="modalHistorico">
+
+        <div class="modal-box modal-historico">
+
+            <div class="modal-topo">
+
+                <h2>Histórico do Cliente</h2>
+
+                <button class="fechar-modal" id="fecharHistorico">
+
+                    <i class="fa-solid fa-xmark"></i>
+
+                </button>
+
+            </div>
+
+            <div id="conteudoHistorico">
+
+                <p class="sem-historico">
+
+                    Nenhum atendimento encontrado.
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <script type="module" src="../js/clientes.js"></script>
+
+</body>
+
+</html>

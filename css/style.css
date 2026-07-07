@@ -1,0 +1,337 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:'Poppins',sans-serif;
+    background:#fff;
+    color:#333;
+}
+
+/* TOPO */
+
+.topo{
+    width:100%;
+    background:#fff;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:15px 8%;
+    box-shadow:0 2px 15px rgba(0,0,0,.05);
+    position:sticky;
+    top:0;
+    z-index:999;
+}
+
+.logo-text{
+    display:flex;
+    flex-direction:column;
+    color:#e96b98;
+}
+
+.logo-text strong{
+    font-size:20px;
+}
+
+.logo-text small{
+    letter-spacing:3px;
+    font-size:10px;
+}
+
+.topo nav{
+    display:flex;
+    gap:25px;
+}
+
+.topo nav a{
+    text-decoration:none;
+    color:#333;
+    font-weight:500;
+    transition:.3s;
+}
+
+.topo nav a:hover{
+    color:#e96b98;
+}
+
+/* BANNER */
+
+.hero{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:50px;
+    padding:40px 8%;
+    min-height:650px;
+    background:linear-gradient(
+        135deg,
+        #fff,
+        #fff7fa
+    );
+}
+
+.hero-texto{
+    max-width:500px;
+}
+
+.hero-texto h1{
+    font-family:'Playfair Display',serif;
+    font-size:72px;
+    line-height:1;
+    color:#e96b98;
+}
+
+.hero-texto h1 span{
+    font-style:italic;
+    font-weight:400;
+}
+
+.hero-texto h2{
+    margin:15px 0 20px;
+    font-size:30px;
+    font-weight:500;
+}
+
+.hero-texto p{
+    line-height:1.8;
+    margin-bottom:30px;
+}
+
+.hero-imagem img{
+    width:100%;
+    max-width:500px;
+    border-radius:20px;
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+}
+
+.btn-principal{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    padding:14px 28px;
+    background:#e96b98;
+    color:#fff;
+    text-decoration:none;
+    border-radius:12px;
+    font-weight:600;
+    transition:.3s;
+}
+
+.btn-principal:hover{
+    transform:translateY(-3px);
+}
+
+/* SERVIÇOS */
+
+.servicos{
+    padding:80px 8%;
+    text-align:center;
+}
+
+.servicos h2{
+    color:#e96b98;
+    margin-bottom:50px;
+}
+
+.cards{
+    display:flex;
+    justify-content:center;
+    gap:25px;
+    flex-wrap:wrap;
+}
+
+.card{
+    width:100%;
+    max-width:220px;
+    background:#fff;
+    border:1px solid #f2d4df;
+    border-radius:15px;
+    padding:20px;
+    transition:.3s;
+}
+.card:hover{
+    transform:translateY(-5px);
+}
+
+.card i{
+    font-size:35px;
+    color:#e96b98;
+    margin-bottom:15px;
+}
+
+.card h3{
+    margin-bottom:10px;
+}
+
+.card p{
+    font-size:22px;
+    font-weight:bold;
+}
+
+/* BENEFÍCIOS */
+
+.beneficios{
+    max-width:1100px;
+    margin:0 auto 70px;
+    padding:20px;
+    background:#fde8ef;
+    border-radius:15px;
+
+    display:flex;
+    justify-content:space-around;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:20px;
+}
+
+.beneficios div{
+    font-weight:500;
+}
+
+/* SOBRE */
+
+.sobre{
+    padding:80px 8%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:60px;
+    flex-wrap:wrap;
+}
+
+.sobre-foto img{
+    width:320px;
+    height:320px;
+    border-radius:50%;
+    object-fit:cover;
+}
+
+.sobre-texto{
+    max-width:550px;
+}
+
+.sobre-texto h2{
+    margin-bottom:20px;
+}
+
+.sobre-texto span{
+    color:#e96b98;
+}
+
+.sobre-texto p{
+    line-height:1.8;
+    margin-bottom:25px;
+}
+
+/* GALERIA */
+
+.galeria{
+    padding:80px 8%;
+    text-align:center;
+}
+
+.galeria h2{
+    color:#e96b98;
+    margin-bottom:40px;
+}
+
+.galeria-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:20px;
+}
+
+.galeria-grid img{
+    width:100%;
+    height:250px;
+    object-fit:cover;
+    border-radius:15px;
+    transition:.3s;
+}
+
+.galeria-grid img:hover{
+    transform:scale(1.03);
+}
+
+/* RODAPÉ */
+
+footer{
+    margin-top:50px;
+    padding:50px;
+    text-align:center;
+    background:linear-gradient(
+        135deg,
+        #f8d9e4,
+        #fff
+    );
+}
+
+footer h3{
+    color:#e96b98;
+    margin-bottom:10px;
+}
+
+footer p{
+    margin-bottom:15px;
+}
+
+footer a{
+    color:#e96b98;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+/* RESPONSIVO */
+
+@media(max-width:900px){
+
+    .topo{
+        flex-direction:column;
+        gap:15px;
+    }
+
+    .topo nav{
+        flex-wrap:wrap;
+        justify-content:center;
+    }
+
+    .hero{
+        flex-direction:column;
+        text-align:center;
+        min-height:auto;
+    }
+
+    .hero-texto h1{
+        font-size:60px;
+    }
+
+    .galeria-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+}
+
+@media(max-width:600px){
+
+    .hero-texto h1{
+        font-size:50px;
+    }
+
+    .card{
+        width:100%;
+    }
+
+    .sobre-foto img{
+        width:250px;
+        height:250px;
+    }
+
+    .galeria-grid{
+        grid-template-columns:1fr;
+    }
+}

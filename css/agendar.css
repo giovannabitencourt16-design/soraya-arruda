@@ -1,0 +1,456 @@
+/*=========================
+RESET
+=========================*/
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:'Poppins',sans-serif;
+    background:#fff8fb;
+    color:#333;
+}
+
+/*=========================
+HEADER
+=========================*/
+
+header{
+    width:100%;
+    background:#ffffff;
+    box-shadow:0 4px 15px rgba(0,0,0,.08);
+    position:sticky;
+    top:0;
+    z-index:999;
+}
+
+.container{
+    width:90%;
+    max-width:1300px;
+    margin:auto;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:18px 0;
+}
+
+.logo{
+    text-decoration:none;
+    font-size:30px;
+    font-weight:700;
+    color:#e85d9e;
+}
+
+nav{
+    display:flex;
+    gap:30px;
+}
+
+nav a{
+    text-decoration:none;
+    color:#555;
+    font-weight:500;
+    transition:.3s;
+}
+
+nav a:hover{
+    color:#e85d9e;
+}
+
+/*=========================
+HERO
+=========================*/
+
+.hero{
+    padding:80px 20px;
+    text-align:center;
+    background:linear-gradient(135deg,#ffd8ea,#fff8fb);
+}
+
+.hero h1{
+    font-size:50px;
+    color:#e85d9e;
+    margin-bottom:20px;
+}
+
+.hero p{
+    max-width:700px;
+    margin:auto;
+    color:#666;
+    font-size:18px;
+    line-height:1.8;
+}
+
+/*=========================
+CONTAINER
+=========================*/
+
+.container-agendamento{
+    width:90%;
+    max-width:1300px;
+    margin:60px auto;
+    display:grid;
+    grid-template-columns:2fr 1fr;
+    gap:35px;
+}
+
+/*=========================
+CARDS
+=========================*/
+
+.card{
+    background:#fff;
+    border-radius:20px;
+    padding:30px;
+    margin-bottom:25px;
+    box-shadow:0 15px 35px rgba(0,0,0,.08);
+}
+
+.card h2{
+    color:#e85d9e;
+    margin-bottom:25px;
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+/*=========================
+INPUTS
+=========================*/
+
+.input-group{
+    display:flex;
+    flex-direction:column;
+    margin-bottom:22px;
+}
+
+.input-group label{
+    margin-bottom:8px;
+    font-weight:600;
+}
+
+.input-group input{
+    padding:16px;
+    border:2px solid #f0d6e2;
+    border-radius:12px;
+    outline:none;
+    font-size:15px;
+    transition:.3s;
+}
+
+.input-group input:focus{
+    border-color:#e85d9e;
+}
+
+/*=========================
+SERVIÇOS
+=========================*/
+
+.servicos{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:20px;
+}
+
+.servico-card{
+    position:relative;
+    cursor:pointer;
+}
+
+.servico-card input{
+    display:none;
+}
+
+.conteudo-servico{
+    background:#fff;
+    border:2px solid #f4dbe7;
+    border-radius:20px;
+    padding:30px;
+    text-align:center;
+    transition:.3s;
+}
+
+.conteudo-servico i{
+    font-size:45px;
+    color:#e85d9e;
+    margin-bottom:18px;
+}
+
+.conteudo-servico h3{
+    margin-bottom:10px;
+    color:#444;
+}
+
+.conteudo-servico p{
+    color:#666;
+    margin-bottom:8px;
+}
+
+.conteudo-servico span{
+    color:#e85d9e;
+    font-weight:bold;
+}
+
+.servico-card:hover .conteudo-servico{
+    transform:translateY(-8px);
+    box-shadow:0 15px 30px rgba(232,93,158,.20);
+}
+
+.servico-card input:checked + .conteudo-servico{
+    background:#ffe4ef;
+    border-color:#e85d9e;
+}
+
+/*=========================
+HORÁRIOS
+=========================*/
+
+.horarios{
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:15px;
+}
+
+.horario{
+    padding:16px;
+    border:none;
+    border-radius:12px;
+    background:#ffffff;
+    border:2px solid #f4dbe7;
+    cursor:pointer;
+    font-size:16px;
+    font-weight:600;
+    transition:.3s;
+}
+
+.horario:hover{
+    background:#e85d9e;
+    color:#fff;
+    border-color:#e85d9e;
+}
+
+.horario.ativo{
+    background:#e85d9e;
+    color:#fff;
+    border-color:#e85d9e;
+}
+
+.horario.bloqueado{
+    background:#ececec;
+    color:#999;
+    cursor:not-allowed;
+    border-color:#ddd;
+}
+
+/*=========================
+RESUMO
+=========================*/
+
+.resumo{
+    position:sticky;
+    top:110px;
+    height:max-content;
+}
+
+.card-resumo{
+    background:#ffffff;
+    border-radius:20px;
+    padding:30px;
+    box-shadow:0 15px 35px rgba(0,0,0,.08);
+}
+
+.card-resumo h2{
+    color:#e85d9e;
+    margin-bottom:25px;
+    text-align:center;
+}
+
+.resumo-item{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:15px 0;
+    border-bottom:1px solid #f2f2f2;
+    gap:20px;
+}
+
+.resumo-item span{
+    color:#666;
+}
+
+.resumo-item strong{
+    color:#e85d9e;
+    text-align:right;
+}
+
+/*=========================
+BOTÃO
+=========================*/
+
+.btn-confirmar{
+    width:100%;
+    margin-top:30px;
+    padding:18px;
+    border:none;
+    border-radius:50px;
+    background:#e85d9e;
+    color:#fff;
+    font-size:18px;
+    font-weight:600;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.btn-confirmar:hover{
+    transform:translateY(-5px);
+    box-shadow:0 15px 30px rgba(232,93,158,.35);
+}
+
+.btn-confirmar i{
+    margin-right:10px;
+}
+
+/*=========================
+OBSERVAÇÃO
+=========================*/
+
+.observacao{
+    margin-top:20px;
+    text-align:center;
+    color:#777;
+    font-size:14px;
+    line-height:1.7;
+}
+
+/*=========================
+FOOTER
+=========================*/
+
+footer{
+    margin-top:80px;
+    background:#e85d9e;
+    color:#fff;
+    text-align:center;
+    padding:25px;
+}
+
+/*=========================
+SCROLL
+=========================*/
+
+::-webkit-scrollbar{
+    width:10px;
+}
+
+::-webkit-scrollbar-thumb{
+    background:#e85d9e;
+    border-radius:20px;
+}
+
+::-webkit-scrollbar-track{
+    background:#f5f5f5;
+}
+
+/*=========================
+ANIMAÇÕES
+=========================*/
+
+.card,
+.card-resumo,
+.servico-card{
+    animation:fade .5s ease;
+}
+
+@keyframes fade{
+
+    from{
+        opacity:0;
+        transform:translateY(25px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+
+}
+
+/*=========================
+RESPONSIVO
+=========================*/
+
+@media(max-width:1100px){
+
+    .container-agendamento{
+        grid-template-columns:1fr;
+    }
+
+    .resumo{
+        position:relative;
+        top:0;
+    }
+
+}
+
+@media(max-width:768px){
+
+    .container{
+        flex-direction:column;
+        gap:20px;
+    }
+
+    nav{
+        flex-wrap:wrap;
+        justify-content:center;
+        gap:15px;
+    }
+
+    .hero{
+        padding:60px 20px;
+    }
+
+    .hero h1{
+        font-size:36px;
+    }
+
+    .hero p{
+        font-size:16px;
+    }
+
+    .horarios{
+        grid-template-columns:repeat(3,1fr);
+    }
+
+}
+
+@media(max-width:550px){
+
+    .servicos{
+        grid-template-columns:1fr;
+    }
+
+    .horarios{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .card,
+    .card-resumo{
+        padding:22px;
+    }
+
+    .logo{
+        font-size:24px;
+    }
+
+    .hero h1{
+        font-size:30px;
+    }
+
+}

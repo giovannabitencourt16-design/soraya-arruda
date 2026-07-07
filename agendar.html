@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Agendar Horário | Soraya Arruda</title>
+
+    <link rel="stylesheet"
+        href="css/agendar.css">
+
+    <link rel="preconnect"
+        href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+</head>
+
+<body>
+
+<header>
+
+    <div class="container">
+
+        <a href="index.html" class="logo">
+
+            Soraya Arruda
+
+        </a>
+
+        <nav>
+
+            <a href="index.html">Início</a>
+
+            <a href="#">Serviços</a>
+
+            <a href="#">Galeria</a>
+
+            <a href="#">Contato</a>
+
+        </nav>
+
+    </div>
+
+</header>
+
+<section class="hero">
+
+    <div class="hero-text">
+
+        <h1>
+
+            Agende seu horário
+
+        </h1>
+
+        <p>
+
+            Escolha os serviços desejados, selecione uma data disponível e confirme seu atendimento pelo WhatsApp.
+
+        </p>
+
+    </div>
+
+</section>
+
+<section class="agendamento">
+
+<div class="container-agendamento">
+
+<div class="formulario">
+
+<div class="card">
+
+<h2>
+
+<i class="fa-solid fa-user"></i>
+
+Dados da Cliente
+
+</h2>
+
+<div class="input-group">
+
+<label>
+
+Nome Completo
+
+</label>
+
+<input
+type="text"
+id="nome"
+placeholder="Digite seu nome">
+
+</div>
+
+<div class="input-group">
+
+<label>
+
+WhatsApp
+
+</label>
+
+<input
+type="tel"
+id="telefone"
+placeholder="(11) 99999-9999">
+
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>
+
+<i class="fa-solid fa-hand-sparkles"></i>
+
+Escolha os serviços
+
+</h2>
+
+<div class="servicos">
+
+<label class="servico-card">
+
+<input
+type="checkbox"
+class="servico"
+data-servico="Mão"
+data-preco="25"
+data-tempo="60">
+
+<div class="conteudo-servico">
+
+<i class="fa-solid fa-hand"></i>
+
+<h3>
+
+Mão
+
+</h3>
+
+<p>
+
+R$25,00
+
+</p>
+
+<span>
+
+60 minutos
+
+</span>
+
+</div>
+
+</label>
+
+<label class="servico-card">
+
+<input
+type="checkbox"
+class="servico"
+data-servico="Pé"
+data-preco="30"
+data-tempo="60">
+
+<div class="conteudo-servico">
+
+<i class="fa-solid fa-shoe-prints"></i>
+
+<h3>
+
+Pé
+
+</h3>
+
+<p>
+
+R$30,00
+
+</p>
+
+<span>
+
+60 minutos
+
+</span>
+
+</div>
+
+</label>
+
+<label class="servico-card">
+
+<input
+type="checkbox"
+class="servico"
+data-servico="Esmaltação"
+data-preco="10"
+data-tempo="40">
+
+<div class="conteudo-servico">
+
+<i class="fa-solid fa-palette"></i>
+
+<h3>
+
+Esmaltação
+
+</h3>
+
+<p>
+
+R$10,00
+
+</p>
+
+<span>
+
+40 minutos
+
+</span>
+
+</div>
+
+</label>
+
+</div>
+
+</div>
+<div class="card">
+
+<h2>
+
+<i class="fa-solid fa-calendar-days"></i>
+
+Escolha a Data
+
+</h2>
+
+<div class="input-group">
+
+<label>
+
+Data do Atendimento
+
+</label>
+
+<input
+type="date"
+id="data">
+
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>
+
+<i class="fa-solid fa-clock"></i>
+
+Escolha um Horário
+
+</h2>
+
+<div class="horarios">
+
+<button class="horario">08:00</button>
+
+<button class="horario">09:00</button>
+
+<button class="horario">10:00</button>
+
+<button class="horario">11:00</button>
+
+<button class="horario">12:00</button>
+
+<button class="horario">13:00</button>
+
+<button class="horario">14:00</button>
+
+<button class="horario">15:00</button>
+
+<button class="horario">16:00</button>
+
+<button class="horario">17:00</button>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="resumo">
+
+<div class="card-resumo">
+
+<h2>
+
+Resumo do Agendamento
+
+</h2>
+
+<div class="resumo-item">
+
+<span>
+
+Cliente
+
+</span>
+
+<strong id="resumoNome">
+
+—
+
+</strong>
+
+</div>
+
+<div class="resumo-item">
+
+<span>
+
+Serviços
+
+</span>
+
+<strong id="resumoServicos">
+
+Nenhum
+
+</strong>
+
+</div>
+
+<div class="resumo-item">
+
+<span>
+
+Tempo Total
+
+</span>
+
+<strong id="resumoTempo">
+
+0 min
+
+</strong>
+
+</div>
+
+<div class="resumo-item">
+
+<span>
+
+Valor
+
+</span>
+
+<strong id="resumoValor">
+
+R$ 0,00
+
+</strong>
+
+</div>
+
+<div class="resumo-item">
+
+<span>
+
+Data
+
+</span>
+
+<strong id="resumoData">
+
+—
+
+</strong>
+
+</div>
+
+<div class="resumo-item">
+
+<span>
+
+Horário
+
+</span>
+
+<strong id="resumoHorario">
+
+—
+
+</strong>
+
+</div>
+
+<button
+id="btnAgendar"
+class="btn-confirmar">
+
+<i class="fa-brands fa-whatsapp"></i>
+
+Confirmar Agendamento
+
+</button>
+
+<p class="observacao">
+
+Ao confirmar, você será direcionada para o WhatsApp com seu agendamento preenchido automaticamente.
+
+</p>
+
+</div>
+
+</aside>
+
+</div>
+
+</section>
+
+<footer>
+
+<div class="container">
+
+<p>
+
+© 2026 Soraya Arruda • Todos os direitos reservados.
+
+</p>
+
+</div>
+
+</footer>
+
+<script type="module" src="js/agendar.js"></script>
+
+</body>
+
+</html>

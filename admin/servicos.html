@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Serviços | Painel Administrativo</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="../css/servicos.css">
+</head>
+
+<body>
+
+<div class="admin-container">
+
+        <!-- ======================================
+         MENU LATERAL
+    ======================================= -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+            <h2>Soraya Arruda</h2>
+            <p>Painel Administrativo</p>
+        </div>
+
+        <nav class="menu">
+
+            <a href="dashboard.html">
+                <i class="fa-solid fa-chart-line"></i>
+                Dashboard
+            </a>
+
+            <a href="agenda.html">
+                <i class="fa-solid fa-calendar-days"></i>
+                Agenda
+            </a>
+
+            <a href="clientes.html">
+                <i class="fa-solid fa-users"></i>
+                Clientes
+            </a>
+
+            <a href="servicos.html" class="ativo">
+                <i class="fa-solid fa-hand-sparkles"></i>
+                Serviços
+            </a>
+
+            <a href="configuracoes.html">
+                <i class="fa-solid fa-gear"></i>
+                Configurações
+            </a>
+
+            <hr>
+
+            <a href="../index.html">
+                <i class="fa-solid fa-house"></i>
+                Voltar ao Site
+            </a>
+
+            <a href="login.html">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                Sair
+            </a>
+
+        </nav>
+
+    </aside>
+
+    <!-- ======================================
+         CONTEÚDO PRINCIPAL
+    ======================================= -->
+
+    <main class="content">
+
+                <!-- ======================================
+             CABEÇALHO DA PÁGINA
+        ======================================= -->
+
+        <header class="page-header">
+
+            <div>
+                <h1>Serviços</h1>
+                <p>Gerencie todos os serviços oferecidos pela Soraya Arruda.</p>
+            </div>
+
+            <button class="btn-novo">
+                <i class="fa-solid fa-plus"></i>
+                Novo Serviço
+            </button>
+
+        </header>
+
+        <!-- ======================================
+             PESQUISA
+        ======================================= -->
+
+        <section class="barra-pesquisa">
+
+            <div class="campo-busca">
+
+                <i class="fa-solid fa-magnifying-glass"></i>
+
+                <input
+                    type="text"
+                    id="buscarServico"
+                    placeholder="Pesquisar serviço..."
+                >
+
+            </div>
+
+        </section>
+
+        <!-- ======================================
+             LISTA DE SERVIÇOS
+        ======================================= -->
+
+        <section class="lista-servicos">
+
+                        <!-- Serviço 1 -->
+
+            <div class="card-servico">
+
+                <div class="icone">
+                    <i class="fa-solid fa-hand"></i>
+                </div>
+
+                <div class="info">
+
+                    <h3>Mão</h3>
+
+                    <p><strong>Categoria:</strong> Mãos</p>
+
+                    <p><strong>Duração:</strong> 60 minutos</p>
+
+                    <p><strong>Valor:</strong> R$ 25,00</p>
+
+                </div>
+
+                <div class="acoes">
+
+                    <button class="btn-editar">
+                        <i class="fa-solid fa-pen"></i>
+                        Editar
+                    </button>
+
+                    <button class="btn-excluir">
+                        <i class="fa-solid fa-trash"></i>
+                        Excluir
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- Serviço 2 -->
+
+            <div class="card-servico">
+
+                <div class="icone">
+                    <i class="fa-solid fa-shoe-prints"></i>
+                </div>
+
+                <div class="info">
+
+                    <h3>Pé</h3>
+
+                    <p><strong>Categoria:</strong> Pés</p>
+
+                    <p><strong>Duração:</strong> 60 minutos</p>
+
+                    <p><strong>Valor:</strong> R$ 30,00</p>
+
+                </div>
+
+                <div class="acoes">
+
+                    <button class="btn-editar">
+                        <i class="fa-solid fa-pen"></i>
+                        Editar
+                    </button>
+
+                    <button class="btn-excluir">
+                        <i class="fa-solid fa-trash"></i>
+                        Excluir
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- Serviço 3 -->
+
+            <div class="card-servico">
+
+                <div class="icone">
+                    <i class="fa-solid fa-palette"></i>
+                </div>
+
+                <div class="info">
+
+                    <h3>Esmaltação</h3>
+
+                    <p><strong>Categoria:</strong> Finalização</p>
+
+                    <p><strong>Duração:</strong> 20 minutos</p>
+
+                    <p><strong>Valor:</strong> R$ 10,00</p>
+
+                </div>
+
+                <div class="acoes">
+
+                    <button class="btn-editar">
+                        <i class="fa-solid fa-pen"></i>
+                        Editar
+                    </button>
+
+                    <button class="btn-excluir">
+                        <i class="fa-solid fa-trash"></i>
+                        Excluir
+                    </button>
+
+                </div>
+
+            </div>
+                    </section>
+
+    </main>
+
+</div>
+
+<!-- JavaScript -->
+<script type="module" src="../js/servicos.js"></script>
+
+</body>
+</html>
