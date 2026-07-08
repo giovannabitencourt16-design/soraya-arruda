@@ -5,6 +5,7 @@ import {
     collection,
     deleteDoc,
     doc,
+    getDoc,
     getDocs,
     orderBy,
     query,
@@ -16,21 +17,17 @@ import {
 // ===============================
 // CONFIGURAÇÕES DA AGENDA
 // ===============================
-const HORARIOS = [
-    "08:00",
-    "09:00",
-    "10:00",
-    "11:00",
-    "12:00",
-    "13:00",
-    "14:00",
-    "15:00",
-    "16:00",
-    "17:00",
-    "18:00"
-];
+const CONFIG_PADRAO = {
+    horarioInicio: "08:00",
+    horarioFim: "18:00",
+    intervaloMinutos: 60,
+    horarioAlmoco: "12:00",
+    diasAtendimento: [1, 2, 3, 4, 5, 6]
+};
 
-const HORARIOS_BLOQUEADOS = ["12:00"];
+let HORARIOS = gerarHorarios(CONFIG_PADRAO.horarioInicio, CONFIG_PADRAO.horarioFim, CONFIG_PADRAO.intervaloMinutos);
+let HORARIOS_BLOQUEADOS = [CONFIG_PADRAO.horarioAlmoco];
+let diasAtendimento = CONFIG_PADRAO.diasAtendimento;
 const DIAS_SEMANA = ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"];
 const MESES = [
     "janeiro",
@@ -102,12 +99,26 @@ onAuthStateChanged(auth, (user) => {
 // ===============================
 // INICIALIZAÇÃO
 // ===============================
-function iniciarAgenda() {
+async function iniciarAgenda() {
+    await carregarConfiguracoes();
     preencherSelectHorarios();
     definirDataMinima();
     renderizarSemana();
     carregarAgendaDoDia();
     configurarEventos();
+}
+
+async function carregarConfiguracoes() {
+    try {
+        const snapshot = await getDoc(doc(db, "configuracoes", "sistema"));
+        const config = snapshot.exists() ? { ...CONFIG_PADRAO, ...snapshot.data() } : CONFIG_PADRAO;
+
+        HORARIOS = gerarHorarios(config.horarioInicio, config.horarioFim, Number(config.intervaloMinutos || 60));
+        HORARIOS_BLOQUEADOS = config.horarioAlmoco ? [config.horarioAlmoco] : [];
+        diasAtendimento = (config.diasAtendimento || CONFIG_PADRAO.diasAtendimento).map(Number);
+    } catch (erro) {
+        console.warn("Configurações da agenda não carregadas. Usando padrão.", erro);
+    }
 }
 
 function configurarEventos() {
@@ -175,7 +186,9 @@ function renderizarSemana() {
 
         const dataFormatada = formatarDataInput(data);
         const botaoDia = document.createElement("button");
+        const diaPermitido = diaAtendimentoPermitido(dataFormatada);
         botaoDia.className = dataFormatada === dataSelecionada ? "dia ativo" : "dia";
+        if (!diaPermitido) botaoDia.classList.add("fechado");
         botaoDia.type = "button";
         botaoDia.innerHTML = `
             <span>${DIAS_SEMANA[data.getDay()]}</span>
@@ -250,6 +263,13 @@ function renderizarLinhasAgenda() {
 
     totalAgendamentos.textContent = totalOcupados;
     totalLivres.textContent = livres;
+
+    if (!diaAtendimentoPermitido(dataSelecionada)) {
+        totalAgendamentos.textContent = 0;
+        totalLivres.textContent = 0;
+        listaAgenda.innerHTML = `<p class="mensagem">Este dia está configurado como fechado.</p>`;
+        return;
+    }
 
     HORARIOS.forEach((horario) => {
         const agendamento = agendamentosDoDia.find((item) => item.horario === horario && item.status !== "cancelado");
@@ -672,6 +692,38 @@ function obterInicioSemana(data) {
     copia.setDate(copia.getDate() - dia);
     copia.setHours(0, 0, 0, 0);
     return copia;
+}
+
+function gerarHorarios(inicio = "08:00", fim = "18:00", intervalo = 60) {
+    const horarios = [];
+    let atual = converterParaMinutos(inicio);
+    const limite = converterParaMinutos(fim);
+    const passo = Number(intervalo || 60);
+
+    while (atual <= limite) {
+        horarios.push(converterParaHorario(atual));
+        atual += passo;
+    }
+
+    return horarios;
+}
+
+function converterParaMinutos(horario) {
+    const [hora, minuto] = String(horario || "00:00").split(":").map(Number);
+    return (hora * 60) + (minuto || 0);
+}
+
+function converterParaHorario(minutos) {
+    const hora = String(Math.floor(minutos / 60)).padStart(2, "0");
+    const minuto = String(minutos % 60).padStart(2, "0");
+    return `${hora}:${minuto}`;
+}
+
+function diaAtendimentoPermitido(dataISO) {
+    if (!dataISO) return true;
+    const [ano, mes, dia] = dataISO.split("-").map(Number);
+    const dataLocal = new Date(ano, mes - 1, dia);
+    return diasAtendimento.includes(dataLocal.getDay());
 }
 
 function formatarDataInput(data) {

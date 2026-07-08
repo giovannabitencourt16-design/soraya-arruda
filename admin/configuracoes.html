@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configurações | Soraya Arruda</title>
+    <link rel="stylesheet" href="../css/configuracoes.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+</head>
+<body>
+<div class="dashboard">
+    <aside class="sidebar">
+        <div class="logo">
+            <h2>Soraya Arruda</h2>
+            <span>Painel Administrativo</span>
+        </div>
+
+        <nav>
+            <a href="dashboard.html"><i class="fa-solid fa-house"></i>Dashboard</a>
+            <a href="agenda.html"><i class="fa-solid fa-calendar-days"></i>Agenda</a>
+            <a href="clientes.html"><i class="fa-solid fa-users"></i>Clientes</a>
+            <a href="servicos.html"><i class="fa-solid fa-hand-sparkles"></i>Serviços</a>
+            <a href="configuracoes.html" class="ativo"><i class="fa-solid fa-gear"></i>Configurações</a>
+            <a href="#" id="btnSair"><i class="fa-solid fa-right-from-bracket"></i>Sair</a>
+        </nav>
+    </aside>
+
+    <main class="conteudo">
+        <header class="topo">
+            <div>
+                <h1>Configurações</h1>
+                <p>Altere os dados principais do sistema sem mexer no código.</p>
+            </div>
+        </header>
+
+        <form id="formConfiguracoes" class="form-config">
+            <section class="card-config">
+                <h2><i class="fa-solid fa-store"></i> Dados do salão</h2>
+
+                <div class="grid-form">
+                    <div class="grupo-form">
+                        <label for="nomeSalao">Nome do salão</label>
+                        <input type="text" id="nomeSalao" placeholder="Soraya Arruda" required>
+                    </div>
+
+                    <div class="grupo-form">
+                        <label for="whatsapp">WhatsApp</label>
+                        <input type="tel" id="whatsapp" placeholder="(11) 97448-1955" required>
+                    </div>
+                </div>
+
+                <div class="grupo-form">
+                    <label for="endereco">Endereço ou observação do atendimento</label>
+                    <input type="text" id="endereco" placeholder="Atendimento em local próprio">
+                </div>
+            </section>
+
+            <section class="card-config">
+                <h2><i class="fa-solid fa-clock"></i> Horários de atendimento</h2>
+
+                <div class="grid-form quatro-colunas">
+                    <div class="grupo-form">
+                        <label for="horarioInicio">Início</label>
+                        <input type="time" id="horarioInicio" required>
+                    </div>
+
+                    <div class="grupo-form">
+                        <label for="horarioFim">Fim</label>
+                        <input type="time" id="horarioFim" required>
+                    </div>
+
+                    <div class="grupo-form">
+                        <label for="intervaloMinutos">Intervalo</label>
+                        <select id="intervaloMinutos">
+                            <option value="30">30 minutos</option>
+                            <option value="60">60 minutos</option>
+                        </select>
+                    </div>
+
+                    <div class="grupo-form">
+                        <label for="horarioAlmoco">Horário fixo bloqueado</label>
+                        <input type="time" id="horarioAlmoco">
+                    </div>
+                </div>
+
+                <p class="ajuda">Exemplo: se o almoço for 12:00, esse horário fica bloqueado automaticamente para os clientes.</p>
+            </section>
+
+            <section class="card-config">
+                <h2><i class="fa-solid fa-calendar-days"></i> Dias de atendimento</h2>
+
+                <div class="dias-check">
+                    <label><input type="checkbox" name="diasAtendimento" value="1"> Segunda</label>
+                    <label><input type="checkbox" name="diasAtendimento" value="2"> Terça</label>
+                    <label><input type="checkbox" name="diasAtendimento" value="3"> Quarta</label>
+                    <label><input type="checkbox" name="diasAtendimento" value="4"> Quinta</label>
+                    <label><input type="checkbox" name="diasAtendimento" value="5"> Sexta</label>
+                    <label><input type="checkbox" name="diasAtendimento" value="6"> Sábado</label>
+                    <label><input type="checkbox" name="diasAtendimento" value="0"> Domingo</label>
+                </div>
+            </section>
+
+            <div class="acoes-form">
+                <p id="mensagemStatus" class="mensagem-status">Carregando configurações...</p>
+                <button type="submit" class="btn-salvar">
+                    <i class="fa-solid fa-floppy-disk"></i>
+                    Salvar Configurações
+                </button>
+            </div>
+        </form>
+    </main>
+</div>
+
+<script type="module" src="../js/configuracoes.js"></script>
+</body>
+</html>

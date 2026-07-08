@@ -3,6 +3,7 @@ import {
     addDoc,
     collection,
     doc,
+    getDoc,
     getDocs,
     orderBy,
     query,
@@ -14,22 +15,20 @@ import {
 // ===============================
 // CONFIGURAÇÕES
 // ===============================
-const HORARIOS = [
-    "08:00",
-    "09:00",
-    "10:00",
-    "11:00",
-    "12:00",
-    "13:00",
-    "14:00",
-    "15:00",
-    "16:00",
-    "17:00",
-    "18:00"
-];
+const CONFIG_PADRAO = {
+    nomeSalao: "Soraya Arruda",
+    whatsapp: "11974481955",
+    horarioInicio: "08:00",
+    horarioFim: "18:00",
+    intervaloMinutos: 60,
+    horarioAlmoco: "12:00",
+    diasAtendimento: [1, 2, 3, 4, 5, 6]
+};
 
-const HORARIOS_BLOQUEADOS = ["12:00"];
-const WHATSAPP_SORAYA = "5511974481955";
+let HORARIOS = gerarHorarios(CONFIG_PADRAO.horarioInicio, CONFIG_PADRAO.horarioFim, CONFIG_PADRAO.intervaloMinutos);
+let HORARIOS_BLOQUEADOS = [CONFIG_PADRAO.horarioAlmoco];
+let WHATSAPP_SORAYA = `55${CONFIG_PADRAO.whatsapp}`;
+let diasAtendimento = CONFIG_PADRAO.diasAtendimento;
 
 const SERVICOS_PADRAO = [
     { nome: "Mão", valor: 25, tempo: 60, categoria: "Mãos", status: "ativo" },
@@ -69,6 +68,7 @@ document.addEventListener("DOMContentLoaded", iniciarPagina);
 async function iniciarPagina() {
     definirDataMinima();
     configurarEventos();
+    await carregarConfiguracoes();
     renderizarHorarios();
     await carregarServicos();
     atualizarResumo();
@@ -84,6 +84,9 @@ function configurarEventos() {
 
     data.addEventListener("change", async () => {
         horarioSelecionado = "";
+        if (!diaAtendimentoPermitido(data.value)) {
+            alert("Este dia não está configurado como dia de atendimento.");
+        }
         await carregarHorariosOcupados();
         atualizarResumo();
     });
@@ -93,6 +96,23 @@ function configurarEventos() {
 
 function definirDataMinima() {
     data.min = formatarDataInput(new Date());
+}
+
+// ===============================
+// SERVIÇOS
+// ===============================
+async function carregarConfiguracoes() {
+    try {
+        const snapshot = await getDoc(doc(db, "configuracoes", "sistema"));
+        const config = snapshot.exists() ? { ...CONFIG_PADRAO, ...snapshot.data() } : CONFIG_PADRAO;
+
+        HORARIOS = gerarHorarios(config.horarioInicio, config.horarioFim, Number(config.intervaloMinutos || 60));
+        HORARIOS_BLOQUEADOS = config.horarioAlmoco ? [config.horarioAlmoco] : [];
+        WHATSAPP_SORAYA = `55${somenteNumeros(config.whatsapp || CONFIG_PADRAO.whatsapp)}`;
+        diasAtendimento = (config.diasAtendimento || CONFIG_PADRAO.diasAtendimento).map(Number);
+    } catch (erro) {
+        console.warn("Configurações não carregadas. Usando padrão.", erro);
+    }
 }
 
 // ===============================
@@ -292,6 +312,12 @@ async function confirmarAgendamento() {
         return;
     }
 
+    if (!diaAtendimentoPermitido(data.value)) {
+        alert("Este dia não está disponível para atendimento.");
+        data.focus();
+        return;
+    }
+
     if (HORARIOS_BLOQUEADOS.includes(horarioSelecionado) || await verificarHorarioBloqueado(data.value, horarioSelecionado)) {
         alert("Este horário está bloqueado.");
         await carregarHorariosOcupados();
@@ -473,6 +499,38 @@ function formatarTelefone(valor) {
     if (numeros.length <= 10) return `(${numeros.slice(0, 2)}) ${numeros.slice(2, 6)}-${numeros.slice(6)}`;
 
     return `(${numeros.slice(0, 2)}) ${numeros.slice(2, 7)}-${numeros.slice(7)}`;
+}
+
+function gerarHorarios(inicio = "08:00", fim = "18:00", intervalo = 60) {
+    const horarios = [];
+    let atual = converterParaMinutos(inicio);
+    const limite = converterParaMinutos(fim);
+    const passo = Number(intervalo || 60);
+
+    while (atual <= limite) {
+        horarios.push(converterParaHorario(atual));
+        atual += passo;
+    }
+
+    return horarios;
+}
+
+function converterParaMinutos(horario) {
+    const [hora, minuto] = String(horario || "00:00").split(":").map(Number);
+    return (hora * 60) + (minuto || 0);
+}
+
+function converterParaHorario(minutos) {
+    const hora = String(Math.floor(minutos / 60)).padStart(2, "0");
+    const minuto = String(minutos % 60).padStart(2, "0");
+    return `${hora}:${minuto}`;
+}
+
+function diaAtendimentoPermitido(dataISO) {
+    if (!dataISO) return true;
+    const [ano, mes, dia] = dataISO.split("-").map(Number);
+    const dataLocal = new Date(ano, mes - 1, dia);
+    return diasAtendimento.includes(dataLocal.getDay());
 }
 
 function formatarDataInput(dataOriginal) {
