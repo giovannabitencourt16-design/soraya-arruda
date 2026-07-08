@@ -186,7 +186,7 @@ function escolherIcone(categoria, nomeServico) {
 async function carregarHorariosOcupados() {
     agendamentosDoDia = [];
     bloqueiosDoDia = [];
-    bloqueiosDoDia = [];
+    
 
     if (!data.value) {
         renderizarHorarios();
