@@ -67,7 +67,7 @@ function iniciarEventos() {
         if (evento.target === modalHistorico) fecharModalHistorico();
     });
 
-    const linkSair = document.querySelector('a[href="login.html"]');
+   const linkSair = document.getElementById("btnSair");
 
     linkSair?.addEventListener("click", async (evento) => {
         evento.preventDefault();
