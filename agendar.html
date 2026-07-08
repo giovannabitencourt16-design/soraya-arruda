@@ -44,11 +44,11 @@
 
             <a href="index.html">Início</a>
 
-            <a href="#">Serviços</a>
+            <a href="index.html#servicos">Serviços</a>
 
-            <a href="#">Galeria</a>
+            <a href="index.html#galeria">Galeria</a>
 
-            <a href="#">Contato</a>
+            <a href="index.html">Contato</a>
 
         </nav>
 
@@ -103,7 +103,8 @@ Nome Completo
 <input
 type="text"
 id="nome"
-placeholder="Digite seu nome">
+placeholder="Digite seu nome"
+autocomplete="name">
 
 </div>
 
@@ -118,7 +119,9 @@ WhatsApp
 <input
 type="tel"
 id="telefone"
-placeholder="(11) 99999-9999">
+placeholder="(11) 99999-9999"
+autocomplete="tel"
+maxlength="15">
 
 </div>
 
@@ -134,7 +137,7 @@ Escolha os serviços
 
 </h2>
 
-<div class="servicos">
+<div class="servicos" id="listaServicosCliente">
 
 <label class="servico-card">
 
@@ -242,6 +245,7 @@ R$10,00
 </label>
 
 </div>
+<p id="mensagemServicos" class="mensagem-servicos"></p>
 
 </div>
 <div class="card">
@@ -280,7 +284,7 @@ Escolha um Horário
 
 </h2>
 
-<div class="horarios">
+<div class="horarios" id="listaHorarios">
 
 <button class="horario">08:00</button>
 
@@ -424,9 +428,9 @@ Confirmar Agendamento
 
 </button>
 
-<p class="observacao">
+<p class="observacao" id="mensagemStatus">
 
-Ao confirmar, você será direcionada para o WhatsApp com seu agendamento preenchido automaticamente.
+Ao confirmar, seu agendamento será salvo e você poderá abrir o WhatsApp com a mensagem pronta.
 
 </p>
 

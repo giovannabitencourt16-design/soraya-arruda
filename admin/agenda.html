@@ -36,6 +36,11 @@
             </div>
 
             <div class="acoes-topo">
+                <button class="btn-novo btn-bloquear-topo" id="abrirBloqueioHorario">
+                    <i class="fa-solid fa-ban"></i>
+                    Bloquear Horário
+                </button>
+
                 <button class="btn-novo" id="abrirNovoAgendamento">
                     <i class="fa-solid fa-plus"></i>
                     Novo Agendamento
@@ -132,6 +137,43 @@
             <div class="acoes-modal">
                 <button type="button" class="btn-cancelar" id="cancelarModal">Cancelar</button>
                 <button type="submit" class="btn-salvar" id="salvarAgendamento">Salvar</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<div class="modal" id="modalBloqueio" aria-hidden="true">
+    <div class="modal-conteudo">
+        <div class="modal-topo">
+            <div>
+                <h2>Bloquear Horário</h2>
+                <p>Use para almoço, imprevistos ou compromissos pessoais.</p>
+            </div>
+            <button class="fechar-modal" id="fecharModalBloqueio" aria-label="Fechar">×</button>
+        </div>
+
+        <form id="formBloqueio">
+            <div class="linha-form">
+                <div class="grupo-form">
+                    <label for="dataBloqueio">Data</label>
+                    <input type="date" id="dataBloqueio" required>
+                </div>
+
+                <div class="grupo-form">
+                    <label for="horarioBloqueio">Horário</label>
+                    <select id="horarioBloqueio" required></select>
+                </div>
+            </div>
+
+            <div class="grupo-form">
+                <label for="motivoBloqueio">Motivo</label>
+                <input type="text" id="motivoBloqueio" placeholder="Ex: almoço, consulta, imprevisto...">
+            </div>
+
+            <div class="acoes-modal">
+                <button type="button" class="btn-cancelar" id="cancelarModalBloqueio">Cancelar</button>
+                <button type="submit" class="btn-salvar">Bloquear</button>
             </div>
         </form>
     </div>

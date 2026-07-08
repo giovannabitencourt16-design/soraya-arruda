@@ -454,3 +454,54 @@ RESPONSIVO
     }
 
 }
+/*=========================
+AJUSTES SPRINT AGENDAMENTO
+=========================*/
+
+.mensagem-servicos{
+    margin-top:15px;
+    color:#777;
+    font-size:14px;
+}
+
+.horario:disabled,
+.horario.bloqueado:hover{
+    background:#ececec;
+    color:#999;
+    border-color:#ddd;
+    transform:none;
+    box-shadow:none;
+}
+
+.btn-confirmar:disabled{
+    opacity:.7;
+    cursor:not-allowed;
+    transform:none;
+    box-shadow:none;
+}
+
+@media(max-width:420px){
+    .container-agendamento{
+        width:94%;
+        margin:35px auto;
+    }
+
+    .horarios{
+        gap:10px;
+    }
+
+    .horario{
+        padding:14px 8px;
+        font-size:14px;
+    }
+
+    .resumo-item{
+        align-items:flex-start;
+        flex-direction:column;
+        gap:5px;
+    }
+
+    .resumo-item strong{
+        text-align:left;
+    }
+}

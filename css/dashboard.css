@@ -581,3 +581,63 @@ RESPONSIVO
     }
 
 }
+
+/* ==========================
+   AJUSTES DASHBOARD DINÂMICO
+========================== */
+
+.mensagem-vazia {
+    color: #777;
+    background: #fff1f7;
+    padding: 18px;
+    border-radius: 14px;
+    text-align: center;
+}
+
+.status.cancelado {
+    background: #ffe1e1;
+    color: #b32626;
+}
+
+.status.concluido {
+    background: #e3f3ff;
+    color: #1669a8;
+}
+
+.status.pendente {
+    background: #fff3cd;
+    color: #9a6a00;
+}
+
+@media(max-width:650px){
+    .sidebar {
+        padding: 25px 18px;
+    }
+
+    .sidebar nav {
+        gap: 8px;
+    }
+
+    .sidebar nav a {
+        padding: 13px;
+        font-size: 14px;
+    }
+
+    .topo h1 {
+        font-size: 28px;
+    }
+
+    .novo {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .card h2 {
+        font-size: 28px;
+    }
+
+    .agenda-dia,
+    .card-lateral {
+        padding: 20px;
+    }
+}

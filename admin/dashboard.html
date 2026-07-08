@@ -60,7 +60,7 @@
                 Configurações
             </a>
 
-            <a href="login.html">
+            <a href="#" id="btnSair">
                 <i class="fa-solid fa-right-from-bracket"></i>
                 Sair
             </a>
@@ -78,7 +78,7 @@
                 <p>Bem-vinda ao seu painel.</p>
             </div>
 
-            <button class="novo">
+            <button class="novo" id="abrirNovoAgendamento">
                 <i class="fa-solid fa-plus"></i>
                 Novo Agendamento
             </button>
@@ -90,25 +90,25 @@
             <div class="card">
                 <i class="fa-solid fa-calendar-check"></i>
                 <h3>Agendamentos Hoje</h3>
-                <h2>3</h2>
+                <h2 id="totalHoje">0</h2>
             </div>
 
             <div class="card">
                 <i class="fa-solid fa-clock"></i>
                 <h3>Próximo Horário</h3>
-                <h2>14:00</h2>
+                <h2 id="proximoHorario">--:--</h2>
             </div>
 
             <div class="card">
                 <i class="fa-solid fa-dollar-sign"></i>
                 <h3>Faturamento</h3>
-                <h2>R$ 80,00</h2>
+                <h2 id="faturamentoHoje">R$ 0,00</h2>
             </div>
 
             <div class="card">
                 <i class="fa-solid fa-users"></i>
                 <h3>Clientes</h3>
-                <h2>27</h2>
+                <h2 id="totalClientes">0</h2>
             </div>
 
         </section>
@@ -118,7 +118,7 @@
             <div class="agenda-dia">
 
                 <div class="titulo">
-                    <h2>Agenda</h2>
+                    <h2>Agenda do dia</h2>
                     <span id="dataSelecionada"></span>
                 </div>
 
@@ -140,24 +140,24 @@
 
                     <h2>Ações Rápidas</h2>
 
-                    <button class="acao">
+                    <button class="acao" id="acaoNovoAgendamento">
                         <i class="fa-solid fa-calendar-plus"></i>
                         Novo Agendamento
                     </button>
 
-                    <button class="acao">
+                    <button class="acao" id="acaoAgenda">
                         <i class="fa-solid fa-ban"></i>
-                        Bloquear Horário
+                        Abrir Agenda
                     </button>
 
-                    <button class="acao">
+                    <button class="acao" id="acaoClientes">
                         <i class="fa-solid fa-users"></i>
                         Clientes
                     </button>
 
-                    <button class="acao">
-                        <i class="fa-solid fa-gear"></i>
-                        Configurações
+                    <button class="acao" id="acaoServicos">
+                        <i class="fa-solid fa-hand-sparkles"></i>
+                        Serviços
                     </button>
 
                 </div>

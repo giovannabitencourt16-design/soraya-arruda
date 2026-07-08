@@ -58,6 +58,7 @@ const totalLivres = document.getElementById("totalLivres");
 const semanaAnterior = document.getElementById("semanaAnterior");
 const proximaSemana = document.getElementById("proximaSemana");
 const abrirNovoAgendamento = document.getElementById("abrirNovoAgendamento");
+const abrirBloqueioHorario = document.getElementById("abrirBloqueioHorario");
 const btnSair = document.getElementById("btnSair");
 
 const modalAgendamento = document.getElementById("modalAgendamento");
@@ -73,9 +74,18 @@ const horarioAgendamento = document.getElementById("horarioAgendamento");
 const observacoes = document.getElementById("observacoes");
 const statusAgendamento = document.getElementById("statusAgendamento");
 
+const modalBloqueio = document.getElementById("modalBloqueio");
+const fecharModalBloqueio = document.getElementById("fecharModalBloqueio");
+const cancelarModalBloqueio = document.getElementById("cancelarModalBloqueio");
+const formBloqueio = document.getElementById("formBloqueio");
+const dataBloqueio = document.getElementById("dataBloqueio");
+const horarioBloqueio = document.getElementById("horarioBloqueio");
+const motivoBloqueio = document.getElementById("motivoBloqueio");
+
 let dataSelecionada = formatarDataInput(new Date());
 let inicioSemana = obterInicioSemana(new Date());
 let agendamentosDoDia = [];
+let bloqueiosDoDia = [];
 
 // ===============================
 // AUTENTICAÇÃO
@@ -115,6 +125,10 @@ function configurarEventos() {
         abrirModalNovo(dataSelecionada);
     });
 
+    abrirBloqueioHorario.addEventListener("click", () => {
+        abrirModalBloqueio(dataSelecionada);
+    });
+
     fecharModal.addEventListener("click", fecharModalAgendamento);
     cancelarModal.addEventListener("click", fecharModalAgendamento);
 
@@ -124,7 +138,17 @@ function configurarEventos() {
         }
     });
 
+    fecharModalBloqueio.addEventListener("click", fecharBloqueioHorario);
+    cancelarModalBloqueio.addEventListener("click", fecharBloqueioHorario);
+
+    modalBloqueio.addEventListener("click", (event) => {
+        if (event.target === modalBloqueio) {
+            fecharBloqueioHorario();
+        }
+    });
+
     formAgendamento.addEventListener("submit", salvarAgendamento);
+    formBloqueio.addEventListener("submit", salvarBloqueioHorario);
 
     telefoneCliente.addEventListener("input", () => {
         telefoneCliente.value = formatarTelefone(telefoneCliente.value);
@@ -192,6 +216,21 @@ async function carregarAgendaDoDia() {
             });
         });
 
+        const consultaBloqueios = query(
+            collection(db, "bloqueiosHorarios"),
+            where("data", "==", dataSelecionada)
+        );
+
+        const resultadoBloqueios = await getDocs(consultaBloqueios);
+        bloqueiosDoDia = [];
+
+        resultadoBloqueios.forEach((documento) => {
+            bloqueiosDoDia.push({
+                id: documento.id,
+                ...documento.data()
+            });
+        });
+
         renderizarLinhasAgenda();
     } catch (erro) {
         console.error("Erro ao carregar agenda:", erro);
@@ -205,7 +244,8 @@ function renderizarLinhasAgenda() {
     const totalOcupados = agendamentosDoDia.filter((item) => item.status !== "cancelado").length;
     const livres = HORARIOS.filter((horario) => {
         const ocupado = agendamentosDoDia.some((item) => item.horario === horario && item.status !== "cancelado");
-        return !HORARIOS_BLOQUEADOS.includes(horario) && !ocupado;
+        const bloqueadoManual = bloqueiosDoDia.some((item) => item.horario === horario);
+        return !HORARIOS_BLOQUEADOS.includes(horario) && !bloqueadoManual && !ocupado;
     }).length;
 
     totalAgendamentos.textContent = totalOcupados;
@@ -214,8 +254,15 @@ function renderizarLinhasAgenda() {
     HORARIOS.forEach((horario) => {
         const agendamento = agendamentosDoDia.find((item) => item.horario === horario && item.status !== "cancelado");
 
+        const bloqueioManual = bloqueiosDoDia.find((item) => item.horario === horario);
+
         if (HORARIOS_BLOQUEADOS.includes(horario)) {
-            listaAgenda.appendChild(criarLinhaBloqueada(horario));
+            listaAgenda.appendChild(criarLinhaBloqueada(horario, { motivo: "Almoço", fixo: true }));
+            return;
+        }
+
+        if (bloqueioManual) {
+            listaAgenda.appendChild(criarLinhaBloqueada(horario, bloqueioManual));
             return;
         }
 
@@ -249,19 +296,29 @@ function criarLinhaLivre(horario) {
     return linha;
 }
 
-function criarLinhaBloqueada(horario) {
+function criarLinhaBloqueada(horario, bloqueio = {}) {
     const linha = document.createElement("div");
     linha.className = "linha bloqueado";
+    const motivo = bloqueio.motivo || "Horário bloqueado";
+    const fixo = Boolean(bloqueio.fixo);
+
     linha.innerHTML = `
         <div class="hora">${horario}</div>
         <div class="info">
-            <strong>Almoço</strong>
+            <strong>${escapeHTML(motivo)}</strong>
             <span>Horário bloqueado.</span>
         </div>
         <div class="acoes-linha">
-            <button class="btn-bloqueado" type="button">Bloqueado</button>
+            ${fixo ? `<button class="btn-bloqueado" type="button">Bloqueado</button>` : `<button class="btn-excluir" type="button" data-acao="desbloquear">Desbloquear</button>`}
         </div>
     `;
+
+    const botaoDesbloquear = linha.querySelector('[data-acao="desbloquear"]');
+
+    if (botaoDesbloquear) {
+        botaoDesbloquear.addEventListener("click", () => excluirBloqueioHorario(bloqueio.id));
+    }
+
     return linha;
 }
 
@@ -365,6 +422,102 @@ function preencherSelectHorarios(horarioSelecionado = "") {
 function definirDataMinima() {
     const hoje = formatarDataInput(new Date());
     dataAgendamento.min = hoje;
+    dataBloqueio.min = hoje;
+}
+
+// ===============================
+// BLOQUEIO DE HORÁRIOS
+// ===============================
+function abrirModalBloqueio(data = dataSelecionada) {
+    formBloqueio.reset();
+    dataBloqueio.value = data;
+    preencherSelectBloqueio();
+    modalBloqueio.classList.add("ativo");
+    modalBloqueio.setAttribute("aria-hidden", "false");
+    dataBloqueio.focus();
+}
+
+function fecharBloqueioHorario() {
+    modalBloqueio.classList.remove("ativo");
+    modalBloqueio.setAttribute("aria-hidden", "true");
+    formBloqueio.reset();
+}
+
+function preencherSelectBloqueio() {
+    horarioBloqueio.innerHTML = `<option value="">Selecione</option>`;
+
+    HORARIOS.forEach((horario) => {
+        const option = document.createElement("option");
+        option.value = horario;
+        option.textContent = horario;
+        horarioBloqueio.appendChild(option);
+    });
+}
+
+async function salvarBloqueioHorario(event) {
+    event.preventDefault();
+
+    if (!dataBloqueio.value || !horarioBloqueio.value) {
+        alert("Escolha a data e o horário para bloquear.");
+        return;
+    }
+
+    const conflito = await verificarConflitoHorario(dataBloqueio.value, horarioBloqueio.value);
+
+    if (conflito) {
+        alert("Este horário já tem um agendamento. Cancele ou exclua o agendamento antes de bloquear.");
+        return;
+    }
+
+    const jaBloqueado = await verificarBloqueioHorario(dataBloqueio.value, horarioBloqueio.value);
+
+    if (jaBloqueado || HORARIOS_BLOQUEADOS.includes(horarioBloqueio.value)) {
+        alert("Este horário já está bloqueado.");
+        return;
+    }
+
+    try {
+        await addDoc(collection(db, "bloqueiosHorarios"), {
+            data: dataBloqueio.value,
+            horario: horarioBloqueio.value,
+            motivo: motivoBloqueio.value.trim() || "Bloqueado pela profissional",
+            criadoEm: serverTimestamp(),
+            atualizadoEm: serverTimestamp()
+        });
+
+        dataSelecionada = dataBloqueio.value;
+        inicioSemana = obterInicioSemana(criarDataLocal(dataSelecionada));
+        renderizarSemana();
+        fecharBloqueioHorario();
+        await carregarAgendaDoDia();
+        alert("Horário bloqueado com sucesso!");
+    } catch (erro) {
+        console.error("Erro ao bloquear horário:", erro);
+        alert("Não foi possível bloquear o horário.");
+    }
+}
+
+async function excluirBloqueioHorario(id) {
+    if (!id || !confirm("Desbloquear este horário?")) return;
+
+    try {
+        await deleteDoc(doc(db, "bloqueiosHorarios", id));
+        await carregarAgendaDoDia();
+    } catch (erro) {
+        console.error("Erro ao desbloquear horário:", erro);
+        alert("Não foi possível desbloquear o horário.");
+    }
+}
+
+async function verificarBloqueioHorario(data, horario) {
+    const consulta = query(
+        collection(db, "bloqueiosHorarios"),
+        where("data", "==", data),
+        where("horario", "==", horario)
+    );
+
+    const resultado = await getDocs(consulta);
+    return !resultado.empty;
 }
 
 // ===============================
@@ -381,7 +534,7 @@ async function salvarAgendamento(event) {
         return;
     }
 
-    if (HORARIOS_BLOQUEADOS.includes(horarioAgendamento.value)) {
+    if (HORARIOS_BLOQUEADOS.includes(horarioAgendamento.value) || await verificarBloqueioHorario(dataAgendamento.value, horarioAgendamento.value)) {
         alert("Este horário está bloqueado.");
         return;
     }
