@@ -1,224 +1,142 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
-
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Agenda | Soraya Arruda</title>
-
     <link rel="stylesheet" href="../css/agenda.css">
-
     <link rel="preconnect" href="https://fonts.googleapis.com">
-
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-    <link rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 </head>
-
 <body>
-
 <div class="dashboard">
-
     <aside class="sidebar">
-
         <div class="logo">
-
             <h2>Soraya Arruda</h2>
-
             <span>Painel Administrativo</span>
-
         </div>
 
         <nav>
-
-            <a href="dashboard.html">
-
-                <i class="fa-solid fa-house"></i>
-
-                Dashboard
-
-            </a>
-
-            <a href="agenda.html" class="ativo">
-
-                <i class="fa-solid fa-calendar-days"></i>
-
-                Agenda
-
-            </a>
-
-            <a href="clientes.html">
-
-                <i class="fa-solid fa-users"></i>
-
-                Clientes
-
-            </a>
-
-            <a href="servicos.html">
-
-                <i class="fa-solid fa-hand-sparkles"></i>
-
-                Serviços
-
-            </a>
-
-            <a href="configuracoes.html">
-
-                <i class="fa-solid fa-gear"></i>
-
-                Configurações
-
-            </a>
-
-            <a href="login.html">
-
-                <i class="fa-solid fa-right-from-bracket"></i>
-
-                Sair
-
-            </a>
-
+            <a href="dashboard.html"><i class="fa-solid fa-house"></i>Dashboard</a>
+            <a href="agenda.html" class="ativo"><i class="fa-solid fa-calendar-days"></i>Agenda</a>
+            <a href="clientes.html"><i class="fa-solid fa-users"></i>Clientes</a>
+            <a href="servicos.html"><i class="fa-solid fa-hand-sparkles"></i>Serviços</a>
+            <a href="configuracoes.html"><i class="fa-solid fa-gear"></i>Configurações</a>
+            <a href="#" id="btnSair"><i class="fa-solid fa-right-from-bracket"></i>Sair</a>
         </nav>
-
     </aside>
 
     <main class="conteudo">
-
         <header class="topo">
-
             <div>
-
                 <h1>Agenda</h1>
-
                 <p>Gerencie todos os horários do dia.</p>
-
             </div>
-<div class="seletor-semana">
 
-    <button class="btn-semana">
-        ◀
-    </button>
-
-    <div class="dias-semana">
-
-        <!-- O JavaScript cria os dias aqui -->
-
-    </div>
-
-    <button class="btn-semana">
-        ▶
-    </button>
-
-</div>
-
+            <div class="acoes-topo">
+                <button class="btn-novo" id="abrirNovoAgendamento">
+                    <i class="fa-solid fa-plus"></i>
+                    Novo Agendamento
+                </button>
+            </div>
         </header>
 
-        <section class="agenda">
+        <section class="seletor-semana">
+            <button class="btn-semana" id="semanaAnterior" aria-label="Semana anterior">◀</button>
+            <div class="dias-semana" id="diasSemana"></div>
+            <button class="btn-semana" id="proximaSemana" aria-label="Próxima semana">▶</button>
+        </section>
 
-            <div class="linha livre">
+        <section class="resumo-dia">
+            <div>
+                <span>Data selecionada</span>
+                <strong id="dataSelecionadaTexto">—</strong>
+            </div>
+            <div>
+                <span>Agendamentos</span>
+                <strong id="totalAgendamentos">0</strong>
+            </div>
+            <div>
+                <span>Horários livres</span>
+                <strong id="totalLivres">0</strong>
+            </div>
+        </section>
 
-                <div class="hora">08:00</div>
+        <section class="agenda" id="listaAgenda">
+            <p class="mensagem">Carregando agenda...</p>
+        </section>
+    </main>
+</div>
 
-                <div class="info">
+<div class="modal" id="modalAgendamento" aria-hidden="true">
+    <div class="modal-conteudo">
+        <div class="modal-topo">
+            <div>
+                <h2 id="tituloModal">Novo Agendamento</h2>
+                <p>Preencha os dados do atendimento.</p>
+            </div>
+            <button class="fechar-modal" id="fecharModal" aria-label="Fechar">×</button>
+        </div>
 
-                    <strong>Livre</strong>
+        <form id="formAgendamento">
+            <input type="hidden" id="agendamentoId">
 
-                    <span>Nenhum atendimento.</span>
-
-                </div>
-
-                <button class="btn-agendar">
-
-                    Agendar
-
-                </button>
-
+            <div class="grupo-form">
+                <label for="nomeCliente">Nome da cliente</label>
+                <input type="text" id="nomeCliente" placeholder="Ex: Maria Silva" required>
             </div>
 
-            <div class="linha livre">
-
-                <div class="hora">09:00</div>
-
-                <div class="info">
-
-                    <strong>Livre</strong>
-
-                    <span>Nenhum atendimento.</span>
-
-                </div>
-
-                <button class="btn-agendar">
-
-                    Agendar
-
-                </button>
-
+            <div class="grupo-form">
+                <label for="telefoneCliente">Telefone</label>
+                <input type="tel" id="telefoneCliente" placeholder="(11) 99999-9999" required>
             </div>
 
-            <div class="linha livre">
-
-                <div class="hora">10:00</div>
-
-                <div class="info">
-
-                    <strong>Livre</strong>
-
-                    <span>Nenhum atendimento.</span>
-
+            <div class="linha-form">
+                <div class="grupo-form">
+                    <label for="dataAgendamento">Data</label>
+                    <input type="date" id="dataAgendamento" required>
                 </div>
 
-                <button class="btn-agendar">
-
-                    Agendar
-
-                </button>
-
-            </div>
-
-            <div class="linha livre">
-
-                <div class="hora">11:00</div>
-
-                <div class="info">
-
-                    <strong>Livre</strong>
-
-                    <span>Nenhum atendimento.</span>
-
+                <div class="grupo-form">
+                    <label for="horarioAgendamento">Horário</label>
+                    <select id="horarioAgendamento" required></select>
                 </div>
-
-                <button class="btn-agendar">
-
-                    Agendar
-
-                </button>
-
             </div>
 
-            <div class="linha bloqueado">
-
-                <div class="hora">12:00</div>
-
-                <div class="info">
-
-                    <strong>Almoço</strong>
-
-                    <span>Horário bloqueado.</span>
-
+            <div class="grupo-form">
+                <label>Serviços</label>
+                <div class="servicos-check">
+                    <label><input type="checkbox" name="servicos" value="Mão"> Mão</label>
+                    <label><input type="checkbox" name="servicos" value="Pé"> Pé</label>
+                    <label><input type="checkbox" name="servicos" value="Esmaltação"> Esmaltação</label>
                 </div>
-
-                <button class="btn-bloqueado">
-
-                    Bloqueado
-
-                </button>
-
             </div>
+
+            <div class="grupo-form">
+                <label for="observacoes">Observações</label>
+                <textarea id="observacoes" rows="3" placeholder="Ex: cutícula fina, alergias, preferência de cor..."></textarea>
+            </div>
+
+            <div class="grupo-form">
+                <label for="statusAgendamento">Status</label>
+                <select id="statusAgendamento">
+                    <option value="confirmado">Confirmado</option>
+                    <option value="pendente">Pendente</option>
+                    <option value="concluido">Concluído</option>
+                    <option value="cancelado">Cancelado</option>
+                </select>
+            </div>
+
+            <div class="acoes-modal">
+                <button type="button" class="btn-cancelar" id="cancelarModal">Cancelar</button>
+                <button type="submit" class="btn-salvar" id="salvarAgendamento">Salvar</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script type="module" src="../js/agenda.js"></script>
+</body>
+</html>

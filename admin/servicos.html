@@ -7,25 +7,17 @@
 
     <title>Serviços | Painel Administrativo</title>
 
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-
-    <!-- CSS -->
     <link rel="stylesheet" href="../css/servicos.css">
 </head>
 
 <body>
 
 <div class="admin-container">
-
-        <!-- ======================================
-         MENU LATERAL
-    ======================================= -->
 
     <aside class="sidebar">
 
@@ -68,7 +60,7 @@
                 Voltar ao Site
             </a>
 
-            <a href="login.html">
+            <a href="#" id="btnSair">
                 <i class="fa-solid fa-right-from-bracket"></i>
                 Sair
             </a>
@@ -77,15 +69,7 @@
 
     </aside>
 
-    <!-- ======================================
-         CONTEÚDO PRINCIPAL
-    ======================================= -->
-
     <main class="content">
-
-                <!-- ======================================
-             CABEÇALHO DA PÁGINA
-        ======================================= -->
 
         <header class="page-header">
 
@@ -94,155 +78,90 @@
                 <p>Gerencie todos os serviços oferecidos pela Soraya Arruda.</p>
             </div>
 
-            <button class="btn-novo">
+            <button class="btn-novo" id="abrirModalServico">
                 <i class="fa-solid fa-plus"></i>
                 Novo Serviço
             </button>
 
         </header>
 
-        <!-- ======================================
-             PESQUISA
-        ======================================= -->
-
         <section class="barra-pesquisa">
 
             <div class="campo-busca">
-
                 <i class="fa-solid fa-magnifying-glass"></i>
-
-                <input
-                    type="text"
-                    id="buscarServico"
-                    placeholder="Pesquisar serviço..."
-                >
-
+                <input type="text" id="buscarServico" placeholder="Pesquisar serviço...">
             </div>
 
         </section>
 
-        <!-- ======================================
-             LISTA DE SERVIÇOS
-        ======================================= -->
-
-        <section class="lista-servicos">
-
-                        <!-- Serviço 1 -->
-
-            <div class="card-servico">
-
-                <div class="icone">
-                    <i class="fa-solid fa-hand"></i>
-                </div>
-
-                <div class="info">
-
-                    <h3>Mão</h3>
-
-                    <p><strong>Categoria:</strong> Mãos</p>
-
-                    <p><strong>Duração:</strong> 60 minutos</p>
-
-                    <p><strong>Valor:</strong> R$ 25,00</p>
-
-                </div>
-
-                <div class="acoes">
-
-                    <button class="btn-editar">
-                        <i class="fa-solid fa-pen"></i>
-                        Editar
-                    </button>
-
-                    <button class="btn-excluir">
-                        <i class="fa-solid fa-trash"></i>
-                        Excluir
-                    </button>
-
-                </div>
-
-            </div>
-
-
-            <!-- Serviço 2 -->
-
-            <div class="card-servico">
-
-                <div class="icone">
-                    <i class="fa-solid fa-shoe-prints"></i>
-                </div>
-
-                <div class="info">
-
-                    <h3>Pé</h3>
-
-                    <p><strong>Categoria:</strong> Pés</p>
-
-                    <p><strong>Duração:</strong> 60 minutos</p>
-
-                    <p><strong>Valor:</strong> R$ 30,00</p>
-
-                </div>
-
-                <div class="acoes">
-
-                    <button class="btn-editar">
-                        <i class="fa-solid fa-pen"></i>
-                        Editar
-                    </button>
-
-                    <button class="btn-excluir">
-                        <i class="fa-solid fa-trash"></i>
-                        Excluir
-                    </button>
-
-                </div>
-
-            </div>
-
-
-            <!-- Serviço 3 -->
-
-            <div class="card-servico">
-
-                <div class="icone">
-                    <i class="fa-solid fa-palette"></i>
-                </div>
-
-                <div class="info">
-
-                    <h3>Esmaltação</h3>
-
-                    <p><strong>Categoria:</strong> Finalização</p>
-
-                    <p><strong>Duração:</strong> 20 minutos</p>
-
-                    <p><strong>Valor:</strong> R$ 10,00</p>
-
-                </div>
-
-                <div class="acoes">
-
-                    <button class="btn-editar">
-                        <i class="fa-solid fa-pen"></i>
-                        Editar
-                    </button>
-
-                    <button class="btn-excluir">
-                        <i class="fa-solid fa-trash"></i>
-                        Excluir
-                    </button>
-
-                </div>
-
-            </div>
-                    </section>
+        <section class="lista-servicos" id="listaServicos">
+            <div class="mensagem-lista">Carregando serviços...</div>
+        </section>
 
     </main>
 
 </div>
 
-<!-- JavaScript -->
+<div class="modal" id="modalServico" aria-hidden="true">
+    <div class="modal-conteudo">
+        <div class="modal-header">
+            <div>
+                <h2 id="tituloModal">Novo Serviço</h2>
+                <p>Preencha os dados do serviço.</p>
+            </div>
+            <button class="btn-fechar" id="fecharModalServico" aria-label="Fechar modal">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+
+        <form id="formServico">
+            <input type="hidden" id="servicoId">
+
+            <div class="grupo-form">
+                <label for="nomeServico">Nome do serviço</label>
+                <input type="text" id="nomeServico" placeholder="Ex: Mão" required>
+            </div>
+
+            <div class="grid-form">
+                <div class="grupo-form">
+                    <label for="categoriaServico">Categoria</label>
+                    <input type="text" id="categoriaServico" placeholder="Ex: Mãos" required>
+                </div>
+
+                <div class="grupo-form">
+                    <label for="tempoServico">Duração em minutos</label>
+                    <input type="number" id="tempoServico" min="1" placeholder="60" required>
+                </div>
+            </div>
+
+            <div class="grid-form">
+                <div class="grupo-form">
+                    <label for="valorServico">Valor</label>
+                    <input type="number" id="valorServico" min="0" step="0.01" placeholder="25.00" required>
+                </div>
+
+                <div class="grupo-form">
+                    <label for="statusServico">Status</label>
+                    <select id="statusServico" required>
+                        <option value="ativo">Ativo</option>
+                        <option value="inativo">Inativo</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="grupo-form">
+                <label for="descricaoServico">Descrição / observação</label>
+                <textarea id="descricaoServico" rows="3" placeholder="Observação opcional"></textarea>
+            </div>
+
+            <div class="modal-acoes">
+                <button type="button" class="btn-cancelar" id="cancelarServico">Cancelar</button>
+                <button type="submit" class="btn-salvar" id="btnSalvarServico">Salvar Serviço</button>
+            </div>
+        </form>
+    </div>
+</div>
+
 <script type="module" src="../js/servicos.js"></script>
 
 </body>
